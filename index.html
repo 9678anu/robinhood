@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robinhood Support Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        :root {
+            --primary: #00C805;
+            --primary-dark: #00A004;
+            --dark: #1A3C34;
+            --light: #E6F5E6;
+            --gray: #6B7280;
+            --white: #FFFFFF;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --rounded: 18px;
+            --transition: all 0.3s ease;
+        }
+        body {
+            background: var(--white);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* Header */
+        .header {
+            background: var(--white);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .header img {
+            height: 42px;
+        }
+        /* Hero */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--light) 100%);
+            padding: 7rem 0;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 4rem;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%23FFFFFF" fill-opacity="0.3" d="M0,192L48,170.7C96,149,192,107,288,96C384,85,480,107,576,149.3C672,192,768,256,864,261.3C960,267,1056,213,1152,181.3C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E') no-repeat bottom;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+        }
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.9rem 2.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: var(--white);
+            border-radius: var(--rounded);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+        }
+        .card svg {
+            width: 50px;
+            height: 50px;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        .card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .card p {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        /* FAQ */
+        .faq {
+            background: var(--light);
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+            border-radius: var(--rounded);
+        }
+        .faq h2 {
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .faq-item {
+            background: var(--white);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .faq-item:hover {
+            transform: translateY(-5px);
+        }
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            color: var(--gray);
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 250px;
+        }
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+        .faq-toggle.active {
+            transform: rotate(180deg);
+        }
+        /* Security */
+        .security-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--rounded);
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .security-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .security-card p {
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+        .security-item {
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+        .security-item:hover {
+            transform: scale(1.05);
+        }
+        .security-item svg {
+            width: 40px;
+            height: 40px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .security-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        /* Disclaimer */
+        .disclaimer {
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: var(--rounded);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        .disclaimer h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .disclaimer p {
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+            border-radius: var(--rounded) var(--rounded) 0 0;
+        }
+        .footer p {
+            margin-bottom: 1rem;
+        }
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        /* Floating Button */
+        .fab {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            background: var(--primary);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            animation: pulse 2s infinite;
+            z-index: 100;
+        }
+        .fab svg {
+            width: 28px;
+            height: 28px;
+            color: var(--white);
+        }
+        .fab:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        .tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: var(--dark);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 5, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 12px rgba(0, 200, 5, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 200, 5, 0); }
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Robinhood_%28company%29_logo.svg/2560px-Robinhood_%28company%29_logo.svg.png" alt="Robinhood Logo">
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your Robinhood Support Hub</h1>
+                <p>Empowering your investments with round-the-clock assistance for seamless account management and trading success.</p>
+                <a href="tel:+1-805-896-9616" class="btn btn-primary">Call Support</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <div class="container">
+        <div class="cards">
+            <div class="card">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                <h3>Account Setup & Management</h3>
+                <p>From opening your account to managing funds, our team guides you every step of the way.</p>
+                <a href="tel:+1-805-896-9616" class="btn btn-primary">Call Support</a>
+            </div>
+            <div class="card">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                <h3>Trading Assistance</h3>
+                <p>Trouble with trades or market orders? Get expert help to resolve issues quickly.</p>
+                <a href="tel:+1-805-896-9616" class="btn btn-primary">Call Support</a>
+            </div>
+            <div class="card">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <h3>Account Security</h3>
+                <p>Protect your investments with support for 2FA setup and unauthorized activity reports.</p>
+                <a href="tel:+1-805-896-9616" class="btn btn-primary">Call Support</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2>Quick Answers to Your Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How can I update my account details?</span>
+                    <svg class="faq-toggle" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Log into your Robinhood account, go to Settings, and update your personal information. For verification issues, reach out to our support team.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What should I do if a trade fails?</span>
+                    <svg class="faq-toggle" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Check your account for error notifications. Common issues include insufficient funds or market restrictions. Contact support for immediate assistance.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How secure is my Robinhood account?</span>
+                    <svg class="faq-toggle" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Your account is protected with advanced encryption and optional 2FA. Our team monitors for suspicious activity 24/7.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How do I transfer funds to my bank?</span>
+                    <svg class="faq-toggle" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+                <div class="faq-answer">
+                    <p>Initiate a withdrawal from the Robinhood app under Transfers. Standard transfers take 3-5 days, with instant options available for a fee.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="tel:+1-805-896-9616" class="btn btn-primary">Call Support</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security -->
+    <section class="security">
+        <div class="container">
+            <div class="security-card">
+                <h2>Trade with Peace of Mind</h2>
+                <p>Robinhood safeguards your investments with cutting-edge security measures, ensuring your funds and data are always protected.</p>
+                <div class="security-grid">
+                    <div class="security-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4 4 1.79 4 4zm0 0l3 3m0 0l3-3m-6 6v6m-3-9h6" />
+                        </svg>
+                        <h3>Top-Tier Encryption</h3>
+                        <p>256-bit SSL encryption secures your transactions and personal data.</p>
+                    </div>
+                    <div class="security-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm0 0c0 4.97-4.03 9-9 9H5m10-9c4.97 0 9-4.03 9-9V3m-9 9V3" />
+                        </svg>
+                        <h3>Constant Vigilance</h3>
+                        <p>Our systems monitor your account 24/7 for any unusual activity.</p>
+                    </div>
+                    <div class="security-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-6a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3>SIPC Coverage</h3>
+                        <p>Your securities are protected up to $500,000 through SIPC.</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2.5rem;">
+                    <a href="tel:+1-805-896-9616" class="btn btn-primary">Call customer Support</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer">
+        <div class="container">
+            <h3>Important Notice</h3>
+            <p>This support resource operates independently and is not affiliated with Robinhood Markets, Inc. All trademarks are owned by their respective parties.</p>
+            <p>For official assistance, please refer to Robinhood’s app or website. This page aims to connect users with reliable support options.</p>
+            <div style="margin-top: 2rem;">
+                <a href="tel:+1-805-896-9616" class="btn btn-primary">Call Robinhood Support</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Robinhood Support Center. All rights reserved.</p>
+            <p><a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a> | <a href="#">Help Center</a></p>
+            <div style="margin-top: 2rem;">
+                <a href="tel:+1-805-896-9616" class="btn btn-primary" style="color: #FFFFFF;">Call Robinhood customer Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Button -->
+    <a href="tel:+1-805-896-9616" class="fab">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path>
+        </svg>
+        <span class="tooltip">Call +1-805-896-9616</span>
+    </a>
+
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+            answer.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
